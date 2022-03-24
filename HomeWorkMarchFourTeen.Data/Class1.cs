@@ -4,5 +4,6 @@ namespace HomeWorkMarchFourTeen.Data
 {
     public class Class1
     {
+
     }
 }

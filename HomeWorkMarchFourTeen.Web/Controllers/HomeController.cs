@@ -1,4 +1,5 @@
-﻿using HomeWorkMarchFourTeen.Web.Models;
+﻿using HomeWorkMarchFourTeen.Data;
+using HomeWorkMarchFourTeen.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,27 +12,17 @@ namespace HomeWorkMarchFourTeen.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            string _connectionString = @"Data Source=.\sqlexpress;Initial Catalog=ALlMyProjects;Integrated Security=true;";
+            public IActionResult Index()
+            {
+                return View();
+            }
+            public IActionResult newSimcha(Simcha simcha)
+            {
+                DataBaseForSimcha dataBase = new DataBaseForSimcha(_connectionString);
+                dataBase.AddSimcha(simcha);
+                return Redirect("/Simcha");
+            }
+        
     }
 }
